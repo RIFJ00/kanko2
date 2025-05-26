@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日本の観光市場動向レポートSPA (2025年初頭)</title>
+    <title>日本の観光市場動向レポートSPA (2025年1－4月期) - 赤色版</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Application Structure Plan: 
         A single-page application with clear thematic sections navigable via a sticky top bar.
+        Color scheme changed to red-based.
         1.  **ヘッダーとナビゲーション**: SPAのタイトルと主要セクションへのリンク。右下に作成者ロゴを追加。
         2.  **概要ハイライト**: 主要な「驚きの数値」と市場全体の簡単な要約を提示し、ユーザーの関心を引きます。音声概要再生機能を追加し、ファイル名を表示。
         3.  **訪日インバウンド市場**: 2025年4月の詳細データ（総数、国別、成長要因）をKPIカード、チャート、説明テキストで表示。
         4.  **国内旅行市場**: 2025年第1四半期の詳細データ（消費額、旅行者数、単価）を同様の形式で表示。
         5.  **日本人海外旅行**: 2025年4月の動向を簡潔に表示。
         6.  **市場の要因と展望**: 政府の計画、市場の機会と課題、レポートの結論を構造化されたテキストで提示。
-        7.  **詳細レポート**: 提供された2つのファイル分析レポートの内容をHTML形式で表示するセクションを追加。文章を「である調」に統一。
+        7.  **詳細レポート**: 提供された2つのファイル分析レポートの内容をHTML形式で表示するセクションを追加。文章を「である調」に統一。 詳細レポートタブ選択時は他のセクションを非表示。
         この構造は、ユーザーがまず全体像を掴み、次に各市場セグメントの詳細を掘り下げ、最後に背景要因と将来展望を理解し、必要に応じて詳細な分析レポートを参照するという自然な情報探索フローをサポートします。各セクションは明確に区切られ、スクロールまたはナビゲーションリンクで容易にアクセス可能です。
     -->
     <!-- Visualization & Content Choices:
-        - **概要**: Goal: Inform, Impress. Viz: Large KPI numbers, icons (Unicode), Audio player with filename display. Method: HTML/Tailwind/JS. Interaction: Static KPIs, Play/Pause audio. Justification: Quick grasp of key figures and audible summary with clear identification of the audio file.
+        - **概要**: Goal: Inform, Impress. Viz: Large KPI numbers, icons (Unicode), Audio player with filename display. Method: HTML/Tailwind/JS. Interaction: Static KPIs, Play/Pause audio. Justification: Quick grasp of key figures and audible summary with clear identification of the audio file. Colors adjusted to red theme.
         - **訪日インバウンド**:
             - KPIs (総数、前年同月比等): Goal: Inform. Viz: KPI Cards. Method: HTML/Tailwind.
             - 月次推移: Goal: Show trend. Viz: Line Chart. Method: Chart.js. Interaction: Tooltips.
@@ -34,33 +35,33 @@
             - KPIs (出国者数、前年同月比): Goal: Inform. Viz: KPI Cards. Method: HTML/Tailwind.
             - 月次推移: Goal: Show trend. Viz: Line Chart. Method: Chart.js. Interaction: Tooltips.
         - **市場要因と展望**: Goal: Explain context. Viz: Structured text, lists, cards. Method: HTML/Tailwind.
-        - **詳細レポート**: Goal: Provide in-depth analysis. Viz: Structured text (である調), tables. Method: HTML/Tailwind. Interaction: Scroll navigation. Justification: Allows users to access the full textual analysis from the source reports with consistent tone.
-        All charts use Chart.js (Canvas). No SVG graphics or Mermaid JS used. This approach balances visual data presentation with textual explanations for comprehensive understanding.
+        - **詳細レポート**: Goal: Provide in-depth analysis. Viz: Structured text (である調), tables. Method: HTML/Tailwind. Interaction: Scroll navigation, tab-like behavior (show only this section). Justification: Allows users to access the full textual analysis from the source reports with consistent tone and focus.
+        All charts use Chart.js (Canvas) with red-themed colors. No SVG graphics or Mermaid JS used. This approach balances visual data presentation with textual explanations for comprehensive understanding.
     -->
     <style>
         body {
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
-            background-color: #f8fafc; /* bg-slate-50 */
-            color: #334155; /* text-slate-700 */
+            background-color: #fff1f2; /* bg-rose-50 */
+            color: #57534e; /* text-stone-700 */
         }
         .sticky-nav {
             position: sticky;
             top: 0;
             z-index: 50;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 241, 242, 0.9); /* rose-50 with opacity */
             backdrop-filter: blur(10px);
         }
         .nav-link {
             transition: color 0.3s ease;
         }
         .nav-link:hover, .nav-link.active {
-            color: #0369a1; /* text-sky-700 */
+            color: #c53030; /* text-red-700 */
             border-bottom-width: 2px;
-            border-color: #0369a1; /* border-sky-700 */
+            border-color: #c53030; /* border-red-700 */
         }
         .creator-logo {
             font-size: 0.75rem; /* text-xs */
-            color: #075985; /* text-sky-800 */
+            color: #991b1b; /* text-red-800 */
             font-weight: 500;
         }
         .kpi-card {
@@ -77,41 +78,41 @@
         .kpi-title {
             font-size: 0.875rem; /* text-sm */
             font-weight: 500; /* font-medium */
-            color: #64748b; /* text-slate-500 */
+            color: #78716c; /* text-stone-500 */
         }
         .kpi-value {
             font-size: 2.25rem; /* text-4xl */
             font-weight: 800; /* font-extrabold */
-            color: #0ea5e9; /* text-sky-500 */
+            color: #ef4444; /* text-red-500 */
             margin-top: 0.25rem; /* mt-1 */
         }
         .kpi-change {
             font-size: 0.875rem; /* text-sm */
             margin-top: 0.25rem; /* mt-1 */
         }
-        .kpi-change.positive { color: #16a34a; /* text-green-600 */ }
+        .kpi-change.positive { color: #16a34a; /* text-green-600 - Green for positive remains contrasty */ }
         .kpi-change.negative { color: #dc2626; /* text-red-600 */ }
 
         .section-heading {
             font-family: 'Noto Sans JP', sans-serif;
             font-weight: 700; /* font-bold */
-            color: #0c4a6e; /* text-sky-800 */
+            color: #991b1b; /* text-red-800 */
             margin-bottom: 1.5rem; /* mb-6 */
             padding-bottom: 0.5rem; /* pb-2 */
-            border-bottom: 2px solid #0ea5e9; /* border-sky-500 */
+            border-bottom: 2px solid #ef4444; /* border-red-500 */
             display: inline-block;
         }
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 700px; /* Tailwind max-w-3xl approx */
+            max-width: 700px; 
             margin-left: auto;
             margin-right: auto;
-            height: 350px; /* Default height, Tailwind h-80/h-96 range */
-            max-height: 400px; /* Tailwind max-h-96 */
+            height: 350px; 
+            max-height: 400px; 
             background-color: white;
-            padding: 1rem; /* p-4 */
-            border-radius: 0.5rem; /* rounded-lg */
+            padding: 1rem; 
+            border-radius: 0.5rem; 
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
          @media (min-width: 768px) { /* md breakpoint */
@@ -119,7 +120,7 @@
                 height: 400px;
             }
         }
-        h1, h2, h3, h4 { /* Added h4 for report sub-subheadings */
+        h1, h2, h3, h4 { 
             font-family: 'Noto Sans JP', sans-serif;
             font-weight: 700;
         }
@@ -130,14 +131,14 @@
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
         .highlight-text {
-            color: #0369a1; /* text-sky-700 */
+            color: #c53030; /* text-red-700 */
             font-weight: 600; /* font-semibold */
         }
         html { scroll-padding-top: 80px; }
         
         .audio-player-container {
-            background-color: #e0f2fe; /* sky-100 */
-            border: 1px solid #bae6fd; /* sky-200 */
+            background-color: #ffe4e6; /* red-100 (Tailwind v2 name, use rose-100 or similar) -> using rose-100 */
+            border: 1px solid #fecdd3; /* rose-200 */
             border-radius: 0.75rem; /* rounded-lg */
             padding: 1rem 1.5rem; /* p-4 md:p-6 */
             margin-bottom: 2rem; /* mb-8 */
@@ -147,7 +148,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .play-pause-button {
-            background-color: #0ea5e9; /* sky-500 */
+            background-color: #ef4444; /* red-500 */
             color: white;
             border-radius: 9999px; /* rounded-full */
             width: 3rem; /* w-12 */
@@ -159,7 +160,7 @@
             flex-shrink: 0; /* Prevent shrinking */
         }
         .play-pause-button:hover {
-            background-color: #0284c7; /* sky-600 */
+            background-color: #dc2626; /* red-600 */
         }
         .play-pause-button:active {
             transform: scale(0.95);
@@ -168,101 +169,103 @@
             font-size: 1.25rem; /* text-xl */
         }
         .audio-player-text {
-            font-size: 0.875rem; /* text-sm, adjusted for potentially longer text */
-            color: #0c4a6e; /* sky-800 */
-            font-weight: 500; /* font-medium */
+            font-size: 0.875rem; 
+            color: #991b1b; /* red-800 */
+            font-weight: 500; 
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            flex-grow: 1; /* Allow text to take available space */
+            flex-grow: 1; 
         }
         .audio-player-status {
-            font-size: 0.75rem; /* text-xs */
-            color: #38bdf8; /* sky-400 */
-            min-width: 80px; /* Ensure space for status text */
+            font-size: 0.75rem; 
+            color: #f87171; /* red-400 */
+            min-width: 80px; 
             text-align: right;
         }
         /* Styles for detailed report content */
         #detailed-report .report-h2 {
-            font-size: 1.75rem; /* text-2xl or 3xl */
-            color: #0c4a6e; /* text-sky-800 */
-            margin-top: 2rem; /* mt-8 */
-            margin-bottom: 1rem; /* mb-4 */
+            font-size: 1.75rem; 
+            color: #991b1b; /* red-800 */
+            margin-top: 2rem; 
+            margin-bottom: 1rem; 
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid #e0f2fe; /* sky-100 */
+            border-bottom: 1px solid #ffe4e6; /* rose-100 */
         }
         #detailed-report .report-h3 {
-            font-size: 1.25rem; /* text-xl */
-            color: #0369a1; /* text-sky-700 */
-            margin-top: 1.5rem; /* mt-6 */
-            margin-bottom: 0.75rem; /* mb-3 */
+            font-size: 1.25rem; 
+            color: #c53030; /* red-700 */
+            margin-top: 1.5rem; 
+            margin-bottom: 0.75rem; 
         }
          #detailed-report .report-h4 {
-            font-size: 1.125rem; /* text-lg */
-            color: #0ea5e9; /* text-sky-500 */
-            margin-top: 1rem; /* mt-4 */
-            margin-bottom: 0.5rem; /* mb-2 */
+            font-size: 1.125rem; 
+            color: #ef4444; /* red-500 */
+            margin-top: 1rem; 
+            margin-bottom: 0.5rem; 
         }
         #detailed-report p {
-            margin-bottom: 1rem; /* mb-4 */
-            line-height: 1.75; /* leading-relaxed */
-            color: #475569; /* text-slate-600 */
+            margin-bottom: 1rem; 
+            line-height: 1.75; 
+            color: #44403c; /* stone-700 */
         }
         #detailed-report ul, #detailed-report ol {
-            margin-left: 1.5rem; /* ml-6 */
-            margin-bottom: 1rem; /* mb-4 */
+            margin-left: 1.5rem; 
+            margin-bottom: 1rem; 
             list-style-position: outside;
         }
         #detailed-report li {
-            margin-bottom: 0.5rem; /* mb-2 */
-            color: #475569; /* text-slate-600 */
+            margin-bottom: 0.5rem; 
+            color: #44403c; /* stone-700 */
         }
         #detailed-report table {
             width: 100%;
-            margin-bottom: 1.5rem; /* mb-6 */
+            margin-bottom: 1.5rem; 
             border-collapse: collapse;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         #detailed-report th, #detailed-report td {
-            border: 1px solid #e2e8f0; /* slate-200 */
-            padding: 0.75rem; /* p-3 */
+            border: 1px solid #e7e5e4; /* stone-200 */
+            padding: 0.75rem; 
             text-align: left;
-            font-size: 0.875rem; /* text-sm */
+            font-size: 0.875rem; 
         }
         #detailed-report th {
-            background-color: #f1f5f9; /* slate-100 */
-            font-weight: 600; /* font-semibold */
-            color: #1e293b; /* slate-800 */
+            background-color: #f5f5f4; /* stone-100 */
+            font-weight: 600; 
+            color: #292524; /* stone-800 */
         }
         #detailed-report td {
             background-color: white;
         }
         #detailed-report strong {
             font-weight: 600;
-            color: #1e293b;
+            color: #292524; /* stone-800 */
+        }
+        /* Class to hide sections when detailed report is active */
+        .section-hidden {
+            display: none !important;
         }
     </style>
 </head>
-<body class="text-slate-700">
-
-    <nav class="sticky-nav shadow-md">
+<body class="text-stone-700"> <nav class="sticky-nav shadow-md">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <span class="font-bold text-xl text-sky-700">日本の観光市場動向 <span class="text-sm text-slate-500">(2025年初頭)</span></span>
+                    <span class="font-bold text-xl text-red-700">日本の観光市場動向 <span class="text-sm text-stone-500">(2025年1－4月期) - 赤色版</span></span>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">概要</a>
-                    <a href="#inbound" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">訪日インバウンド</a>
-                    <a href="#domestic" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">国内旅行</a>
-                    <a href="#outbound" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">海外旅行</a>
-                    <a href="#outlook" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">市場要因と展望</a>
-                    <a href="#detailed-report" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">詳細レポート</a>
+                    <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-600">概要</a>
+                    <a href="#inbound" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-600">訪日インバウンド</a>
+                    <a href="#domestic" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-600">国内旅行</a>
+                    <a href="#outbound" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-600">海外旅行</a>
+                    <a href="#outlook" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-600">市場要因と展望</a>
+                    <a href="#detailed-report" id="nav-detailed-report" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-600">詳細レポート</a>
                     <span class="creator-logo ml-4">一般社団法人日本みらい研 作成</span>
                 </div>
                 <div class="md:hidden flex items-center">
                     <span class="creator-logo mr-2">日本みらい研</span>
-                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-sky-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-stone-400 hover:text-red-700 hover:bg-rose-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500">
                         <span class="sr-only">メインメニューを開く</span>
                         <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -276,20 +279,20 @@
         </div>
         <div id="mobile-menu" class="md:hidden hidden">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#overview" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-600">概要</a>
-                <a href="#inbound" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-600">訪日インバウンド</a>
-                <a href="#domestic" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-600">国内旅行</a>
-                <a href="#outbound" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-600">海外旅行</a>
-                <a href="#outlook" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-600">市場要因と展望</a>
-                <a href="#detailed-report" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-600">詳細レポート</a>
+                <a href="#overview" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-600">概要</a>
+                <a href="#inbound" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-600">訪日インバウンド</a>
+                <a href="#domestic" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-600">国内旅行</a>
+                <a href="#outbound" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-600">海外旅行</a>
+                <a href="#outlook" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-600">市場要因と展望</a>
+                <a href="#detailed-report" id="nav-detailed-report-mobile" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-stone-600">詳細レポート</a>
             </div>
         </div>
     </nav>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <section id="overview" class="mb-12 pt-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-sky-700 text-center mb-6">日本の観光市場：2025年初頭の活況</h2>
+        <section id="overview" class="mb-12 pt-8 main-section">
+            <h2 class="text-3xl md:text-4xl font-bold text-red-700 text-center mb-6">日本の観光市場：2025年1－4月期の活況</h2>
             
             <div class="audio-player-container max-w-xl mx-auto">
                 <button id="playPauseButton" class="play-pause-button" aria-label="音声概要を再生/一時停止">
@@ -301,35 +304,35 @@
                 <audio id="audioSummaryPlayer" src="https://www.rifj.jp/wp/wp-content/uploads/2025/05/2025-爆増インバウンド！過去最高390万人突破の裏側と持続可能な観光への課題.m4a"></audio> 
             </div>
 
-            <p class="text-center text-lg text-slate-600 mb-8 max-w-3xl mx-auto">
-                2025年初頭、日本の観光市場は目覚ましい回復と成長を遂げた。特に訪日外客数は歴史的な記録を更新し、国内旅行も堅調な伸びを示している。このセクションでは、その主要なハイライトを概観する。
+            <p class="text-center text-lg text-stone-600 mb-8 max-w-3xl mx-auto">
+                2025年1－4月期、日本の観光市場は目覚ましい回復と成長を遂げた。特に訪日外客数は歴史的な記録を更新し、国内旅行も堅調な伸びを示している。このセクションでは、その主要なハイライトを概観する。
             </p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="kpi-card text-center">
-                    <div class="text-4xl text-sky-600 mb-2">🌏</div>
+                    <div class="text-4xl text-red-600 mb-2">🌏</div>
                     <p class="kpi-title">2025年4月 訪日外客数</p>
                     <p class="kpi-value">390.9<span class="text-2xl">万人</span></p>
-                    <p class="kpi-change positive">+28.5% <span class="text-slate-500 text-xs">(前年同月比)</span></p>
-                    <p class="text-sm text-sky-600 font-semibold mt-1">単月過去最高！</p>
+                    <p class="kpi-change positive">+28.5% <span class="text-stone-500 text-xs">(前年同月比)</span></p>
+                    <p class="text-sm text-red-600 font-semibold mt-1">単月過去最高！</p>
                 </div>
                 <div class="kpi-card text-center">
-                    <div class="text-4xl text-sky-600 mb-2">📈</div>
+                    <div class="text-4xl text-red-600 mb-2">📈</div>
                     <p class="kpi-title">2025年1-4月 累計訪日外客数</p>
                     <p class="kpi-value">1,444.7<span class="text-2xl">万人</span></p>
-                    <p class="kpi-change positive">+24.5% <span class="text-slate-500 text-xs">(前年同期比)</span></p>
+                    <p class="kpi-change positive">+24.5% <span class="text-stone-500 text-xs">(前年同期比)</span></p>
                 </div>
                 <div class="kpi-card text-center">
-                    <div class="text-4xl text-sky-600 mb-2">🏠</div>
+                    <div class="text-4xl text-red-600 mb-2">🏠</div>
                     <p class="kpi-title">2025年Q1 国内旅行消費額</p>
                     <p class="kpi-value">5.65<span class="text-2xl">兆円</span></p>
-                    <p class="kpi-change positive">+15.5% <span class="text-slate-500 text-xs">(前年同期比)</span></p>
+                    <p class="kpi-change positive">+15.5% <span class="text-stone-500 text-xs">(前年同期比)</span></p>
                 </div>
             </div>
         </section>
 
-        <section id="inbound" class="mb-12 pt-8">
+        <section id="inbound" class="mb-12 pt-8 main-section">
             <h2 class="section-heading text-2xl md:text-3xl">✈️ 訪日インバウンド市場の動向 (2025年4月)</h2>
-            <p class="mb-8 text-slate-600">
+            <p class="mb-8 text-stone-600">
                 2025年4月の訪日外客数は、桜シーズン、イースター休暇、航空便の拡充、円安などの好条件が重なり、単月として過去最高を記録した。このセクションでは、その詳細なデータと背景要因を掘り下げる。
             </p>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -356,17 +359,17 @@
             </div>
             <div class="grid lg:grid-cols-2 gap-8 mb-8">
                 <div class="chart-container">
-                    <h3 class="text-xl font-semibold text-center mb-2 text-slate-700">月別訪日外客数推移 (2025年)</h3>
+                    <h3 class="text-xl font-semibold text-center mb-2 text-stone-700">月別訪日外客数推移 (2025年)</h3>
                     <canvas id="inboundMonthlyChart"></canvas>
                 </div>
                 <div class="chart-container">
-                    <h3 class="text-xl font-semibold text-center mb-2 text-slate-700">主要5市場 国別訪日外客数 (2025年4月)</h3>
+                    <h3 class="text-xl font-semibold text-center mb-2 text-stone-700">主要5市場 国別訪日外客数 (2025年4月)</h3>
                     <canvas id="inboundCountryChart"></canvas>
                 </div>
             </div>
             <div class="content-card">
-                <h3 class="text-xl font-semibold text-slate-700 mb-3">記録的な成長とその要因</h3>
-                <ul class="list-disc list-inside space-y-2 text-slate-600">
+                <h3 class="text-xl font-semibold text-stone-700 mb-3">記録的な成長とその要因</h3>
+                <ul class="list-disc list-inside space-y-2 text-stone-600">
                     <li><span class="highlight-text">10市場で単月過去最高を更新</span> (インド、カナダ、英国等)。</li>
                     <li><span class="highlight-text">11市場で4月として過去最高を記録</span> (韓国、中国、米国等)。</li>
                     <li>主な成長要因：
@@ -383,9 +386,9 @@
             </div>
         </section>
 
-        <section id="domestic" class="mb-12 pt-8">
+        <section id="domestic" class="mb-12 pt-8 main-section">
             <h2 class="section-heading text-2xl md:text-3xl">🚅 国内旅行市場の動向 (2025年Q1)</h2>
-            <p class="mb-8 text-slate-600">
+            <p class="mb-8 text-stone-600">
                 2025年第1四半期の国内旅行市場も堅調に推移し、消費額・旅行者数ともに前年同期を上回った。特に旅行単価の上昇が目立ち、高付加価値な旅行へのシフトがうかがえる。
             </p>
             <div class="grid md:grid-cols-3 gap-6 mb-8">
@@ -407,17 +410,17 @@
             </div>
              <div class="grid lg:grid-cols-2 gap-8 mb-8">
                 <div class="chart-container">
-                    <h3 class="text-xl font-semibold text-center mb-2 text-slate-700">国内旅行消費額内訳 (2025年Q1)</h3>
+                    <h3 class="text-xl font-semibold text-center mb-2 text-stone-700">国内旅行消費額内訳 (2025年Q1)</h3>
                     <canvas id="domesticConsumptionChart"></canvas>
                 </div>
                 <div class="chart-container">
-                    <h3 class="text-xl font-semibold text-center mb-2 text-slate-700">国内延べ旅行者数内訳 (2025年Q1)</h3>
+                    <h3 class="text-xl font-semibold text-center mb-2 text-stone-700">国内延べ旅行者数内訳 (2025年Q1)</h3>
                     <canvas id="domesticTravelersChart"></canvas>
                 </div>
             </div>
             <div class="content-card">
-                <h3 class="text-xl font-semibold text-slate-700 mb-3">国内旅行の注目ポイント</h3>
-                <ul class="list-disc list-inside space-y-2 text-slate-600">
+                <h3 class="text-xl font-semibold text-stone-700 mb-3">国内旅行の注目ポイント</h3>
+                <ul class="list-disc list-inside space-y-2 text-stone-600">
                     <li>宿泊旅行の消費額 (<span class="highlight-text">4兆5,866億円、+18.5%増</span>) が日帰り旅行 (<span class="highlight-text">1兆617億円、+4.1%増</span>) より高い伸び。</li>
                     <li>宿泊旅行の単価 (<span class="highlight-text">68,807円/人、+9.8%増</span>) が顕著に上昇。</li>
                     <li>旅行者数の伸び (6.0%) より消費額の伸び (15.5%) が大きく、旅行単価が上昇傾向。</li>
@@ -425,9 +428,9 @@
             </div>
         </section>
 
-        <section id="outbound" class="mb-12 pt-8">
+        <section id="outbound" class="mb-12 pt-8 main-section">
             <h2 class="section-heading text-2xl md:text-3xl">🛫 日本人海外旅行の動向 (2025年4月)</h2>
-            <p class="mb-8 text-slate-600">
+            <p class="mb-8 text-stone-600">
                 日本人海外旅行者数も回復傾向にあるが、訪日インバウンド市場の急増と比較すると、そのペースは緩やかである。円安が海外旅行費用を押し上げている可能性が考えられる。
             </p>
             <div class="grid md:grid-cols-2 gap-6 mb-8">
@@ -443,27 +446,27 @@
                 </div>
             </div>
             <div class="chart-container mx-auto">
-                 <h3 class="text-xl font-semibold text-center mb-2 text-slate-700">月別日本人出国者数推移 (2025年)</h3>
+                 <h3 class="text-xl font-semibold text-center mb-2 text-stone-700">月別日本人出国者数推移 (2025年)</h3>
                 <canvas id="outboundMonthlyChart"></canvas>
             </div>
         </section>
 
-        <section id="outlook" class="mb-12 pt-8">
+        <section id="outlook" class="mb-12 pt-8 main-section">
             <h2 class="section-heading text-2xl md:text-3xl">📊 市場の要因と今後の展望</h2>
-            <p class="mb-8 text-slate-600">
+            <p class="mb-8 text-stone-600">
                 現在の観光市場の活況は様々な要因に支えられているが、持続的な成長のためには課題への対応も不可欠である。ここでは、政府の戦略、市場の機会と課題、そして今後の展望についてまとめる。
             </p>
             <div class="grid lg:grid-cols-2 gap-8">
                 <div class="content-card">
-                    <h3 class="text-xl font-semibold text-sky-700 mb-3">観光立国推進基本計画の柱</h3>
+                    <h3 class="text-xl font-semibold text-red-700 mb-3">観光立国推進基本計画の柱</h3>
                     <ul class="space-y-3">
-                        <li><strong class="text-slate-700">持続可能な観光:</strong> 環境・社会・経済への影響を考慮し、地域との共存を図る。</li>
-                        <li><strong class="text-slate-700">消費額拡大:</strong> 高付加価値な体験提供で一人当たり消費額を向上。</li>
-                        <li><strong class="text-slate-700">地方誘客促進:</strong> 地方部への観光客誘致で地域経済を活性化。</li>
+                        <li><strong class="text-stone-700">持続可能な観光:</strong> 環境・社会・経済への影響を考慮し、地域との共存を図る。</li>
+                        <li><strong class="text-stone-700">消費額拡大:</strong> 高付加価値な体験提供で一人当たり消費額を向上。</li>
+                        <li><strong class="text-stone-700">地方誘客促進:</strong> 地方部への観光客誘致で地域経済を活性化。</li>
                     </ul>
                 </div>
                 <div class="content-card">
-                    <h3 class="text-xl font-semibold text-sky-700 mb-3">市場環境：機会と課題</h3>
+                    <h3 class="text-xl font-semibold text-red-700 mb-3">市場環境：機会と課題</h3>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div>
                             <h4 class="font-semibold text-green-600 mb-1">主な機会 🌟</h4>
@@ -486,19 +489,19 @@
                 </div>
             </div>
             <div class="content-card mt-8">
-                <h3 class="text-xl font-semibold text-sky-700 mb-3">総括と今後の展望</h3>
-                <p class="text-slate-600 leading-relaxed">
-                    2025年初頭の日本の観光市場は、特にインバウンドを中心に歴史的な成長を遂げた。この好調を維持し、「観光立国」を実現するためには、人手不足の解消、地方誘客の強化、高付加価値体験の創出、そして何よりも持続可能な観光のあり方を追求する戦略的視点と実行力が不可欠である。現在の好機を活かし、これらの課題に積極的に取り組むことが、日本の観光市場の長期的な発展の鍵となるであろう。
+                <h3 class="text-xl font-semibold text-red-700 mb-3">総括と今後の展望</h3>
+                <p class="text-stone-600 leading-relaxed">
+                    2025年1－4月期の日本の観光市場は、特にインバウンドを中心に歴史的な成長を遂げた。この好調を維持し、「観光立国」を実現するためには、人手不足の解消、地方誘客の強化、高付加価値体験の創出、そして何よりも持続可能な観光のあり方を追求する戦略的視点と実行力が不可欠である。現在の好機を活かし、これらの課題に積極的に取り組むことが、日本の観光市場の長期的な発展の鍵となるであろう。
                 </p>
             </div>
         </section>
 
-        <section id="detailed-report" class="mb-12 pt-8">
-            <h2 class="section-heading text-2xl md:text-3xl">📑 詳細レポート：日本の観光市場動向分析 (2025年初頭)</h2>
+        <section id="detailed-report" class="mb-12 pt-8 main-section"> 
+            <h2 class="section-heading text-2xl md:text-3xl">📑 詳細レポート：日本の観光市場動向分析 (2025年1－4月期)</h2>
             <div class="content-card">
                 <h3 class="report-h2">I. エグゼクティブサマリー</h3>
-                <p>本レポートは、日本政府観光局（JNTO）および観光庁が発表した最新データに基づき、2025年初頭における日本の観光市場の動向を分析するものである。特に2025年4月の訪日外客数、2025年第1四半期の国内旅行市場、そして関連する政策や市場環境に焦点を当てる。</p>
-                <p>2025年初頭の日本の観光市場は、顕著な回復力と成長を示した。特に、2025年4月の訪日外客数は390万人を超え、単月として過去最高を記録した [1]。これは、新型コロナウイルス感染症拡大前の水準をも上回るものであり、力強い回復と新たな成長局面への移行を示唆している。この背景には、春の桜シーズンという季節的魅力に加え、多くの国・地域でイースター休暇が4月に集中したこと、国際航空便の増便や新規就航、そして継続する円安傾向といった複数の好条件が重なったことが挙げられる [1]。これらの要因が複合的に作用し、訪日需要を大幅に押し上げたと分析される。</p>
+                <p>本レポートは、日本政府観光局（JNTO）および観光庁が発表した最新データに基づき、2025年1－4月期における日本の観光市場の動向を分析するものである。特に2025年4月の訪日外客数、2025年第1四半期の国内旅行市場、そして関連する政策や市場環境に焦点を当てる。</p>
+                <p>2025年1－4月期の日本の観光市場は、顕著な回復力と成長を示した。特に、2025年4月の訪日外客数は390万人を超え、単月として過去最高を記録した [1]。これは、新型コロナウイルス感染症拡大前の水準をも上回るものであり、力強い回復と新たな成長局面への移行を示唆している。この背景には、春の桜シーズンという季節的魅力に加え、多くの国・地域でイースター休暇が4月に集中したこと、国際航空便の増便や新規就航、そして継続する円安傾向といった複数の好条件が重なったことが挙げられる [1]。これらの要因が複合的に作用し、訪日需要を大幅に押し上げたと分析される。</p>
                 <p>国内旅行市場もまた、2025年第1四半期において旅行消費額、旅行者数ともに前年同期比で増加し、堅調な内需を示した [1]。一方で、日本人海外旅行者数も増加傾向にはあるものの、訪日外客数の急増と比較すると、その回復ペースは緩やかである [1, 1]。</p>
                 <p>このような市場の活況は、観光産業にとって大きな機会を提供する一方で、労働力不足や旅行費用の高騰といった課題も顕在化させている [1]。日本政府は、2023年3月に策定された「第4次観光立国推進基本計画」に基づき、「持続可能な観光」「消費額拡大」「地方誘客促進」を柱とした戦略的な取り組みを進めており [1]、現在の好調な市場環境をこれらの目標達成に繋げることが求められる。</p>
 
@@ -740,7 +743,7 @@
                 <p>特に円安は、インバウンド誘致には強力な武器となる一方で、日本人にとっては海外旅行を割高にし（前述IV.A）、また輸入品に依存する国内観光事業者にとってはコスト増要因となる「両刃の剣」である。また、人手不足は、現在の観光ブームを持続可能なものとし、質の高い体験を提供するための最大のボトルネックの一つであり、この解決なくして「持続可能な観光」や「消費額拡大」の本格的な達成は難しい。</p>
 
                 <h3 class="report-h2">VI. 総括と今後の展望</h3>
-                <p>2025年初頭の日本の観光市場は、訪日インバウンドを中心に力強い回復と成長を遂げ、特に4月には過去最高の訪日外客数を記録するなど、活況を呈している。これは、桜シーズンやイースター休暇といった季節的・時事的要因、航空便の拡充、そして何よりも円安という強力な追い風が複合的に作用した結果である。国内旅行市場も消費額・旅行者数ともに堅調に推移し、旅行単価の上昇も見られた。一方で、日本人海外旅行の回復ペースは相対的に緩やかである。</p>
+                <p>2025年1－4月期の日本の観光市場は、訪日インバウンドを中心に力強い回復と成長を遂げ、特に4月には過去最高の訪日外客数を記録するなど、活況を呈している。これは、桜シーズンやイースター休暇といった季節的・時事的要因、航空便の拡充、そして何よりも円安という強力な追い風が複合的に作用した結果である。国内旅行市場も消費額・旅行者数ともに堅調に推移し、旅行単価の上昇も見られた。一方で、日本人海外旅行の回復ペースは相対的に緩やかである。</p>
                 <p>これらの動向は、「第4次観光立国推進基本計画」が掲げる目標達成に向けて大きな機会を提供するものの、人手不足やコスト高騰といった構造的な課題への対応、そして急増する観光客を適切に管理し、持続可能な観光を実現するための取り組みが急務である。</p>
                 <p>今後の展望として、円安や国際的な航空ネットワークの回復が続く限り、訪日インバウンド市場は引き続き好調を維持すると予想される。しかし、この勢いを持続させ、真の「観光立国」を実現するためには、目先の数字に一喜一憂するのではなく、人手不足の解消（人材育成、待遇改善、DX推進等）、地方への誘客分散策の強化、高付加価値な旅行体験の創出、そして何よりも観光客と地域住民双方にとって満足度の高い、持続可能な観光のあり方を追求する戦略的視点と実行力が不可欠である。現在の好機を活かし、これらの課題に積極的に取り組むことが、日本の観光市場の長期的な発展に繋がるであろう。</p>
             </div>
@@ -748,8 +751,7 @@
 
     </main>
 
-    <footer class="bg-slate-800 text-slate-300 py-8 text-center">
-        <p class="text-sm">データ出典: 日本政府観光局(JNTO)・観光庁 報道発表資料 (2025年5月21日)</p>
+    <footer class="bg-red-900 text-red-100 py-8 text-center"> <p class="text-sm">データ出典: 日本政府観光局(JNTO)・観光庁 報道発表資料 (2025年5月21日)</p>
         <p class="text-xs mt-1">このSPAは提供された情報に基づき作成されたものです。</p>
     </footer>
 
@@ -763,12 +765,33 @@
             mobileMenuButton.querySelectorAll('svg').forEach(svg => svg.classList.toggle('hidden'));
         });
 
+        const mainSections = document.querySelectorAll('.main-section'); 
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    if (targetId === 'detailed-report') {
+                        mainSections.forEach(section => {
+                            if (section.id !== 'detailed-report') {
+                                section.classList.add('section-hidden');
+                            } else {
+                                section.classList.remove('section-hidden'); 
+                            }
+                        });
+                    } else {
+                        mainSections.forEach(section => {
+                            section.classList.remove('section-hidden');
+                        });
+                    }
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                
                 if (mobileMenu.classList.contains('hidden') === false) {
                     mobileMenu.classList.add('hidden');
                     mobileMenuButton.querySelectorAll('svg').forEach(svg => svg.classList.toggle('hidden'));
@@ -776,17 +799,26 @@
             });
         });
 
-        const sections = document.querySelectorAll('section[id]');
+        const sectionsForScrollSpy = document.querySelectorAll('section[id]'); 
         const navLinks = document.querySelectorAll('nav a.nav-link');
 
         window.addEventListener('scroll', () => {
             let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
+            const detailedReportIsActiveExclusive = document.getElementById('detailed-report').classList.contains('section-hidden') === false && 
+                                                Array.from(mainSections).some(s => s.id !== 'detailed-report' && s.classList.contains('section-hidden'));
+
+            if (!detailedReportIsActiveExclusive || !document.getElementById('nav-detailed-report').classList.contains('active')) {
+                 sectionsForScrollSpy.forEach(section => {
+                    if (!section.classList.contains('section-hidden')) {
+                        const sectionTop = section.offsetTop;
+                        if (pageYOffset >= sectionTop - 100) {
+                            current = section.getAttribute('id');
+                        }
+                    }
+                });
+            } else {
+                current = 'detailed-report';
+            }
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
@@ -805,13 +837,14 @@
         Chart.defaults.plugins.tooltip.padding = 10;
         Chart.defaults.plugins.tooltip.cornerRadius = 4;
         
+        // Adjusted chart colors for red theme
         const chartColors = {
-            sky: 'rgb(14, 165, 233)',
-            blue: 'rgb(59, 130, 246)',
-            indigo: 'rgb(99, 102, 241)',
-            green: 'rgb(34, 197, 94)',
-            amber: 'rgb(245, 158, 11)',
-            slate: 'rgb(100, 116, 139)'
+            red: 'rgb(239, 68, 68)',        // Replaces sky
+            rose: 'rgb(244, 63, 94)',       // Replaces blue
+            pink: 'rgb(236, 72, 153)',      // Replaces indigo
+            orange: 'rgb(249, 115, 22)',    // Replaces green
+            yellow: 'rgb(234, 179, 8)',     // Replaces amber
+            stone: 'rgb(120, 113, 108)'     // Replaces slate
         };
 
         const inboundMonthlyData = {
@@ -819,8 +852,8 @@
             datasets: [{
                 label: '訪日外客数 (万人)',
                 data: [378.2, 325.8, 349.8, 390.9],
-                borderColor: chartColors.sky,
-                backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                borderColor: chartColors.red,
+                backgroundColor: 'rgba(239, 68, 68, 0.1)',
                 fill: true,
                 tension: 0.3,
                 pointRadius: 4,
@@ -838,7 +871,7 @@
             datasets: [{
                 label: '訪日外客数 (万人)',
                 data: [76.51, 72.16, 53.76, 32.75, 26.36, (390.89 - (76.51+72.16+53.76+32.75+26.36))],
-                backgroundColor: [chartColors.sky, chartColors.blue, chartColors.indigo, chartColors.green, chartColors.amber, chartColors.slate],
+                backgroundColor: [chartColors.red, chartColors.rose, chartColors.pink, chartColors.orange, chartColors.yellow, chartColors.stone],
                 borderRadius: 4,
                 borderWidth: 0,
             }]
@@ -858,7 +891,7 @@
             datasets: [{
                 label: '消費額 (兆円)',
                 data: [4.59, 1.06],
-                backgroundColor: [chartColors.indigo, chartColors.sky],
+                backgroundColor: [chartColors.pink, chartColors.red],
                 hoverOffset: 8
             }]
         };
@@ -873,7 +906,7 @@
             datasets: [{
                 label: '延べ旅行者数 (百万人)',
                 data: [66.66, 52.98],
-                backgroundColor: [chartColors.green, chartColors.amber],
+                backgroundColor: [chartColors.orange, chartColors.yellow],
                 hoverOffset: 8
             }]
         };
@@ -888,8 +921,8 @@
             datasets: [{
                 label: '日本人出国者数 (万人)',
                 data: [91.2, 118.1, 142.3, 96.1],
-                borderColor: chartColors.amber,
-                backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                borderColor: chartColors.yellow,
+                backgroundColor: 'rgba(234, 179, 8, 0.1)',
                 fill: true,
                 tension: 0.3,
                 pointRadius: 4,
@@ -915,7 +948,7 @@
                 try {
                     const url = new URL(audioPlayer.src);
                     let fileName = url.pathname.substring(url.pathname.lastIndexOf('/') + 1);
-                    fileName = fileName.substring(0, fileName.lastIndexOf('.'));
+                    fileName = fileName.substring(0, fileName.lastIndexOf('.')); 
                     audioFileNameText.textContent = decodeURIComponent(fileName);
                     audioFileNameText.title = decodeURIComponent(fileName); 
                 } catch (e) {
@@ -1017,8 +1050,7 @@
         
         audioPlayer.addEventListener('loadedmetadata', updateAudioFileName);
 
-
-        window.dispatchEvent(new Event('scroll'));
+        window.dispatchEvent(new Event('scroll')); 
     </script>
 </body>
 </html>
