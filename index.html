@@ -12,7 +12,7 @@
         A single-page application with clear thematic sections navigable via a sticky top bar.
         Color scheme changed to red-based.
         1.  **ヘッダーとナビゲーション**: SPAのタイトルと主要セクションへのリンク。右下に作成者ロゴを追加。
-        2.  **概要ハイライト**: 主要な「驚きの数値」と市場全体の簡単な要約を提示し、ユーザーの関心を引きます。音声概要再生機能を追加し、ファイル名を表示。
+        2.  **概要ハイライト**: 主要な「驚きの数値」と市場全体の簡単な要約を提示し、ユーザーの関心を引きます。音声概要再生機能を追加し、ファイル名を表示。概要セクションのタイトルから「の活況」を削除。
         3.  **訪日インバウンド市場**: 2025年4月の詳細データ（総数、国別、成長要因）をKPIカード、チャート、説明テキストで表示。
         4.  **国内旅行市場**: 2025年第1四半期の詳細データ（消費額、旅行者数、単価）を同様の形式で表示。
         5.  **日本人海外旅行**: 2025年4月の動向を簡潔に表示。
@@ -21,7 +21,7 @@
         この構造は、ユーザーがまず全体像を掴み、次に各市場セグメントの詳細を掘り下げ、最後に背景要因と将来展望を理解し、必要に応じて詳細な分析レポートを参照するという自然な情報探索フローをサポートします。各セクションは明確に区切られ、スクロールまたはナビゲーションリンクで容易にアクセス可能です。
     -->
     <!-- Visualization & Content Choices:
-        - **概要**: Goal: Inform, Impress. Viz: Large KPI numbers, icons (Unicode), Audio player with filename display. Method: HTML/Tailwind/JS. Interaction: Static KPIs, Play/Pause audio. Justification: Quick grasp of key figures and audible summary with clear identification of the audio file. Colors adjusted to red theme.
+        - **概要**: Goal: Inform, Impress. Viz: Large KPI numbers, icons (Unicode), Audio player with filename display. Method: HTML/Tailwind/JS. Interaction: Static KPIs, Play/Pause audio. Justification: Quick grasp of key figures and audible summary with clear identification of the audio file. Colors adjusted to red theme. Section title updated.
         - **訪日インバウンド**:
             - KPIs (総数、前年同月比等): Goal: Inform. Viz: KPI Cards. Method: HTML/Tailwind.
             - 月次推移: Goal: Show trend. Viz: Line Chart. Method: Chart.js. Interaction: Tooltips.
@@ -292,7 +292,7 @@
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <section id="overview" class="mb-12 pt-8 main-section">
-            <h2 class="text-3xl md:text-4xl font-bold text-red-700 text-center mb-6">日本の観光市場：2025年1－4月期の活況</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-red-700 text-center mb-6">日本の観光市場：2025年1－4月期</h2>
             
             <div class="audio-player-container max-w-xl mx-auto">
                 <button id="playPauseButton" class="play-pause-button" aria-label="音声概要を再生/一時停止">
